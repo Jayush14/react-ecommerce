@@ -1,40 +1,40 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchAllProducts,fetchAllProductsByFilters } from './ProductAPI';
+import { fetchAllProducts,fetchProductsByFilters } from './ProductAPI';
 
 const initialState = {
-  Products: [],
+  products: [],
   status: 'idle',
-  totalItems:0,
+  totalItems:0
 };
 
-export const fetchAllProductsByFiltersAsync= createAsyncThunk(
-  'Product/fetchAllProductsByFilters',
-    async ({filter,sort,pagination}) => {
-      const response = await fetchAllProductsByFilters(filter,sort,pagination);
-      
-    return response.data;
-  }
-);
 
 export const fetchAllProductsAsync = createAsyncThunk(
-  'Product/fetchAllProducts',
+  'product/fetchAllProducts',
   async () => {
     const response = await fetchAllProducts();
-    
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+export const fetchProductsByFiltersAsync = createAsyncThunk(
+  'product/fetchProductsByFilters',
+  async ({filter,sort,pagination}) => {
+    const response = await fetchProductsByFilters(filter,sort,pagination);
+    // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
 
-export const ProductSlice = createSlice({
-  name: 'Product',
+
+
+export const productSlice = createSlice({
+  name: 'product',
   initialState,
   reducers: {
     increment: (state) => {
-      
-     // state.value += 1;
+      state.value += 1;
     },
   },
- 
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProductsAsync.pending, (state) => {
@@ -42,23 +42,22 @@ export const ProductSlice = createSlice({
       })
       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.Products = action.payload;
+        state.products = action.payload;
       })
-      .addCase(fetchAllProductsByFiltersAsync.pending, (state) => {
+      .addCase(fetchProductsByFiltersAsync.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchAllProductsByFiltersAsync.fulfilled, (state, action) => {
+      .addCase(fetchProductsByFiltersAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.Products = action.payload;
-     //   state.totalItems = action.payload.totalItems;
+        state.products = action.payload.products;
+        state.totalItems = action.payload.totalItems;
       });
   },
 });
 
-export const { increment} = ProductSlice.actions;
+export const { increment } = productSlice.actions;
 
- 
-export const selectAllProducts = (state) => state.Product.Products;
-//export const selectTotalItems = (state) => state.product.totalItems;
+export const selectAllProducts = (state) => state.product.products;
+export const selectTotalItems = (state) => state.product.totalItems;
 
-export default ProductSlice.reducer;
+export default productSlice.reducer;
