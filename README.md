@@ -14,6 +14,25 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### Backend
+
+To run the backend server, use the following command:
+
+`json-server --watch data3.json --port 8080`
+
+This starts a backend server using json-server and serves data locally.
+
+Accessing the Server
+
+Open [http://localhost:8080](http://localhost:8080) in your browser to view the local server.
+
+## Available Resources
+
+- Products
+- Categories
+- Brands
+
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
