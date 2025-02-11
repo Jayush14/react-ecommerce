@@ -21,6 +21,7 @@ func main() {
 	router.HandleFunc("/products", handlers.GetProductsHandler).Methods("GET")
 	router.HandleFunc("/categories", handlers.GetCategoriesHandler).Methods("GET")
 	router.HandleFunc("/brands", handlers.GetBrandsHandler).Methods("GET")
+	router.HandleFunc("/products/filter", handlers.GetFilteredProductsHandler).Methods("GET")
 	port := ":8000"
 	fmt.Printf("Starting server on port %s\n", port)
 	log.Fatal(http.ListenAndServe(port, router))
