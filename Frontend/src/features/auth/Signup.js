@@ -10,6 +10,7 @@ import logo from "../images/logo22.png"
 
 export default function Signup() {
  
+  // const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
   return (
