@@ -1,7 +1,8 @@
 package models
 
+import(
+ "database/sql"
+)
 type Brand struct {
-	Value string `json:"value"`
-	Label string `json:"label"`
-	Checked bool `json:"checked"`
+	Brand   sql.NullString `json:"value"`
 }
