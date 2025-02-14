@@ -1,7 +1,6 @@
 package models
 
+import "database/sql"
 type Category struct {
-	Value string `json:"value"`
-	Label string `json:"label"`
-	Checked bool `json:"checked"`
+	Category sql.NullString `json:"value"`
 }

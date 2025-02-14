@@ -9,7 +9,6 @@ import LoginPage from './Pages/LoginPage';
 import CartPage from './Pages/CartPage';
 import CheckOutPage from './Pages/CheckOutPage';
 import ProductDetailPage from './Pages/ProductDetailPage';
- 
 import { createRoot } from "react-dom/client";
 import {
   createBrowserRouter,
